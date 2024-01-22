@@ -26,6 +26,9 @@ flutter:
         fileName: src/connectivity_plus_web.dart
       windows:
         pluginClass: ConnectivityPlusWindowsPlugin
+      ohos:
+        package: dev.fluttercommunity.plus.connectivity
+        pluginClass: ConnectivityPlugin
 
 dependencies:
   flutter:
