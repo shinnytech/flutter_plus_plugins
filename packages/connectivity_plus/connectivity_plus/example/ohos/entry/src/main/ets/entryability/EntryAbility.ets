@@ -14,16 +14,16 @@
 */
 
 import { FlutterAbility } from '@ohos/flutter_ohos'
-import ConnectivityPlugin
-  from '@ohos/connectivity_plus/src/main/ets/dev/fluttercommunity/plus/connectivity/ConnectivityPlugin'
 import FlutterEngine from '@ohos/flutter_ohos/src/main/ets/embedding/engine/FlutterEngine';
 import List from '@ohos.util.List';
+import { GeneratedPluginRegistrant } from '../plugins/GeneratedPluginRegistrant';
+import { FlutterPlugin } from '@ohos/flutter_ohos/src/main/ets/embedding/engine/plugins/FlutterPlugin'
+
 
 export default class EntryAbility extends FlutterAbility {
   configureFlutterEngine(flutterEngine: FlutterEngine) {
     super.configureFlutterEngine(flutterEngine)
     let plugins = GeneratedPluginRegistrant.getPlugins() as List<FlutterPlugin>;
-    this.addPlugin(new ConnectivityPlugin())
     plugins.forEach((plugin) => {
       this.addPlugin(plugin);
     })

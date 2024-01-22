@@ -1,5 +1,7 @@
 import { FlutterPlugin } from '@ohos/flutter_ohos/src/main/ets/embedding/engine/plugins/FlutterPlugin';
 import List from '@ohos.util.List';
+import ConnectivityPlugin
+  from '@ohos/connectivity_plus/src/main/ets/dev/fluttercommunity/plus/connectivity/ConnectivityPlugin'
 
 /**
  * Generated file. Do not edit.
@@ -8,7 +10,8 @@ import List from '@ohos.util.List';
  */
 export class GeneratedPluginRegistrant {
   static getPlugins(): List<FlutterPlugin> {
-    let pluginList : List<FlutterPlugin> = new List();
+    let pluginList: List<FlutterPlugin> = new List();
+    pluginList.add(new ConnectivityPlugin())
     return pluginList;
   }
 }
