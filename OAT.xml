@@ -94,6 +94,7 @@
                 <filteritem type="filepath" name="*/ohos/dta/icudtl.dat" desc="ohos字体库文件，不影响兼容性"/>
                 <filteritem type="filepath" name="*/ohos/hvigor/hvigor-wrapper.js" desc="hvigorw编译程序，不影响兼容性"/>
                 <filteritem type="filepath" name="*/ohos/hvigorw.bat" desc="hvigorw编译程序，不影响兼容性"/>
+
                 <filteritem type="filepath" name="*/ohos/har/har_product/flutter_embedding.har.profile.10" desc="二进制文件,不影响兼容性"/>
                 <filteritem type="filepath" name="*/ohos/har/flutter_embedding.har.debug.10" desc="二进制文件,不影响兼容性"/>
                 <filteritem type="filepath" name="*/ohos/har/flutter_embedding.har.release.10" desc="二进制文件,不影响兼容性"/>
@@ -107,6 +108,9 @@
                 <filteritem type="filepath" name="*/ohos/har/har_product/libflutter.so.release.10" desc="二进制文件,不影响兼容性"/>
                 <filteritem type="filepath" name="*/ohos/har/har_product/libflutter.so.debug.10" desc="二进制文件,不影响兼容性"/>
 
+                <filteritem type="filepath" name="packages/connectivity_plus/connectivity_plus/example/ohos/hvigorw.bat" desc="hvigorw编译程序，不影响兼容性"/>
+                <filteritem type="filepath" name="packages/connectivity_plus/connectivity_plus/example/ohos/hvigor/hvigor-wrapper.js" desc="hvigorw编译程序，不影响兼容性"/>
+                
                 <filteritem type='filepath' name="packages/connectivity_plus/connectivity_plus/ohos/dependencies/hvigor-ohos-arkui-x-plugin-2.3.0-s.tgz" desc='二进制文件,不影响兼容性'/>
                 <filteritem type='filepath' name="packages/connectivity_plus/connectivity_plus/ohos/dependencies/hvigor-ohos-plugin-3.2.1-s.tgz" desc='二进制文件,不影响兼容性'/>
                 <filteritem type='filepath' name="packages/connectivity_plus/connectivity_plus/ohos/dependencies/hvigor-3.2.1-s.tgz" desc='二进制文件,不影响兼容性'/>
