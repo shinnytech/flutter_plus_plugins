@@ -12,6 +12,7 @@ import 'src/model/android_device_info.dart';
 import 'src/model/ios_device_info.dart';
 import 'src/model/linux_device_info.dart';
 import 'src/model/macos_device_info.dart';
+import 'src/model/ohos_device_info.dart';
 import 'src/model/web_browser_info.dart';
 import 'src/model/windows_device_info.dart';
 
@@ -22,6 +23,7 @@ export 'src/model/android_device_info.dart';
 export 'src/model/ios_device_info.dart';
 export 'src/model/linux_device_info.dart';
 export 'src/model/macos_device_info.dart';
+export 'src/model/ohos_device_info.dart';
 export 'src/model/web_browser_info.dart';
 export 'src/model/windows_device_info.dart';
 
@@ -85,6 +87,13 @@ class DeviceInfoPlugin {
   Future<MacOsDeviceInfo> get macOsInfo async => _cachedMacosDeviceInfo ??=
       MacOsDeviceInfo.fromMap((await _platform.deviceInfo()).data);
 
+  /// This information does not change from call to call. Cache it.
+  OhosDeviceInfo? _cachedOhosDeviceInfo;
+
+  /// Returns device information for ohos. Information sourced from Sysctl.
+  Future<OhosDeviceInfo> get ohosInfo async => _cachedOhosDeviceInfo ??=
+      OhosDeviceInfo.fromMap((await _platform.deviceInfo()).data);
+
   WindowsDeviceInfo? _cachedWindowsDeviceInfo;
 
   /// Returns device information for Windows.
@@ -105,6 +114,8 @@ class DeviceInfoPlugin {
         return linuxInfo;
       } else if (Platform.isMacOS) {
         return macOsInfo;
+      } else if (Platform.isOhos) {
+        return ohosInfo;
       } else if (Platform.isWindows) {
         return windowsInfo;
       }

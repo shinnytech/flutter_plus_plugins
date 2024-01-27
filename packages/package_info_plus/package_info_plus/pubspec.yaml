@@ -8,6 +8,9 @@ issue_tracker: https://github.com/fluttercommunity/plus_plugins/labels/package_i
 flutter:
   plugin:
     platforms:
+      ohos:
+        package: dev.fluttercommunity.plus.packageinfo
+        pluginClass: PackageInfoPlugin
       android:
         package: dev.fluttercommunity.plus.packageinfo
         pluginClass: PackageInfoPlugin

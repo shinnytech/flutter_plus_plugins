@@ -1,0 +1,9 @@
+{
+  "module": {
+    "name": "packageInfoPlus",
+    "type": "har",
+    "deviceTypes": [
+      "default",
+    ]
+  }
+}

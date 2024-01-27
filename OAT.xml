@@ -144,7 +144,7 @@
             <filefilter name="readmeOpenSourcefileNamePolicyFilter" desc="Filters for README.OpenSource file policies">
             </filefilter>
             <filefilter name="binaryFileTypePolicyFilter" desc="Filters for binary file policies">
-                <filteritem type="filename" name="*.iml|*.json|*.txt" desc="desc files"/>
+            	<filteritem type="filename" name="*.iml|*.json|*.txt" desc="desc files"/>
             </filefilter>
         </filefilterlist>
     </oatconfig>

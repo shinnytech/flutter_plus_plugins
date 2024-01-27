@@ -44,21 +44,33 @@ class _MyAppState extends State<MyApp> {
       if (kIsWeb) {
         deviceData = _readWebBrowserInfo(await deviceInfoPlugin.webBrowserInfo);
       } else {
-        deviceData = switch (defaultTargetPlatform) {
-          TargetPlatform.android =>
-            _readAndroidBuildData(await deviceInfoPlugin.androidInfo),
-          TargetPlatform.iOS =>
-            _readIosDeviceInfo(await deviceInfoPlugin.iosInfo),
-          TargetPlatform.linux =>
-            _readLinuxDeviceInfo(await deviceInfoPlugin.linuxInfo),
-          TargetPlatform.windows =>
-            _readWindowsDeviceInfo(await deviceInfoPlugin.windowsInfo),
-          TargetPlatform.macOS =>
-            _readMacOsDeviceInfo(await deviceInfoPlugin.macOsInfo),
-          TargetPlatform.fuchsia => <String, dynamic>{
+        switch (defaultTargetPlatform) {
+          case TargetPlatform.android:
+            deviceData =
+                _readAndroidBuildData(await deviceInfoPlugin.androidInfo);
+            break;
+          case TargetPlatform.iOS:
+            deviceData = _readIosDeviceInfo(await deviceInfoPlugin.iosInfo);
+            break;
+          case TargetPlatform.linux:
+            deviceData = _readLinuxDeviceInfo(await deviceInfoPlugin.linuxInfo);
+            break;
+          case TargetPlatform.windows:
+            deviceData =
+                _readWindowsDeviceInfo(await deviceInfoPlugin.windowsInfo);
+            break;
+          case TargetPlatform.macOS:
+            deviceData = _readMacOsDeviceInfo(await deviceInfoPlugin.macOsInfo);
+            break;
+          case TargetPlatform.ohos:
+            deviceData = _readOhosDeviceInfo(await deviceInfoPlugin.ohosInfo);
+            break;
+          case TargetPlatform.fuchsia:
+            deviceData = <String, dynamic>{
               'Error:': 'Fuchsia platform isn\'t supported'
-            },
-        };
+            };
+            break;
+        }
       }
     } on PlatformException {
       deviceData = <String, dynamic>{
@@ -184,6 +196,45 @@ class _MyAppState extends State<MyApp> {
     };
   }
 
+  Map<String, dynamic> _readOhosDeviceInfo(OhosDeviceInfo data) {
+    return <String, dynamic>{
+      'deviceType': data.deviceType,
+      'manufacture': data.manufacture,
+      'brand': data.brand,
+      'marketName': data.marketName,
+      'productSeries': data.productSeries,
+      'productModel': data.productModel,
+      'softwareModel': data.softwareModel,
+      'hardwareModel': data.hardwareModel,
+      'hardwareProfile': data.hardwareProfile,
+      'serial': data.serial,
+      'bootloaderVersion': data.bootloaderVersion,
+      'abiList': data.abiList,
+      'securityPatchTag': data.securityPatchTag,
+      'displayVersion': data.displayVersion,
+      'incrementalVersion': data.incrementalVersion,
+      'osReleaseType': data.osReleaseType,
+      'osFullName': data.osFullName,
+      'majorVersion': data.majorVersion,
+      'seniorVersion': data.seniorVersion,
+      'featureVersion': data.featureVersion,
+      'buildVersion': data.buildVersion,
+      'sdkApiVersion': data.sdkApiVersion,
+      'firstApiVersion': data.firstApiVersion,
+      'versionId': data.versionId,
+      'buildType': data.buildType,
+      'buildUser': data.buildUser,
+      'buildHost': data.buildHost,
+      'buildTime': data.buildTime,
+      'buildRootHash': data.buildRootHash,
+      'udid': data.udid,
+      'distributionOSName': data.distributionOSName,
+      'distributionOSVersion': data.distributionOSVersion,
+      'distributionOSApiVersion': data.distributionOSApiVersion,
+      'distributionOSReleaseType': data.distributionOSReleaseType,
+    };
+  }
+
   Map<String, dynamic> _readWindowsDeviceInfo(WindowsDeviceInfo data) {
     return <String, dynamic>{
       'numberOfCores': data.numberOfCores,
@@ -259,14 +310,26 @@ class _MyAppState extends State<MyApp> {
     );
   }
 
-  String _getAppBarTitle() => kIsWeb
-      ? 'Web Browser info'
-      : switch (defaultTargetPlatform) {
-          TargetPlatform.android => 'Android Device Info',
-          TargetPlatform.iOS => 'iOS Device Info',
-          TargetPlatform.linux => 'Linux Device Info',
-          TargetPlatform.windows => 'Windows Device Info',
-          TargetPlatform.macOS => 'MacOS Device Info',
-          TargetPlatform.fuchsia => 'Fuchsia Device Info',
-        };
+  String _getAppBarTitle() {
+    if (kIsWeb) {
+      return 'Web Browser info';
+    } else {
+      switch (defaultTargetPlatform) {
+        case TargetPlatform.android:
+          return 'Android Device Info';
+        case TargetPlatform.iOS:
+          return 'iOS Device Info';
+        case TargetPlatform.linux:
+          return 'Linux Device Info';
+        case TargetPlatform.windows:
+          return 'Windows Device Info';
+        case TargetPlatform.macOS:
+          return 'MacOS Device Info';
+        case TargetPlatform.ohos:
+          return 'Ohos Device Info';
+        case TargetPlatform.fuchsia:
+          return 'Fuchsia Device Info';
+      }
+    }
+  }
 }
