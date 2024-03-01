@@ -23,6 +23,9 @@ flutter:
       windows:
         dartPluginClass: SharePlusWindowsPlugin
         pluginClass: SharePlusWindowsPluginCApi
+      ohos:
+        package: dev.fluttercommunity.plus.share
+        pluginClass: SharePlusOhosPlugin
 
 dependencies:
   cross_file: ^0.3.3+4
