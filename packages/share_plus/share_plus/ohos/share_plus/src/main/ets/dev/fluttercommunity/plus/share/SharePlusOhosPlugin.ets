@@ -12,38 +12,53 @@
 * See the License for the specific language governing permissions and
 * limitations under the License.
 */
-
+import common from '@ohos.app.ability.common'
+import Log from '@ohos/flutter_ohos/src/main/ets/util/Log';
 import AbilityAware from '@ohos/flutter_ohos/src/main/ets/embedding/engine/plugins/ability/AbilityAware';
 import {
   AbilityPluginBinding
 } from '@ohos/flutter_ohos/src/main/ets/embedding/engine/plugins/ability/AbilityPluginBinding';
-import { FlutterPlugin,
-  FlutterPluginBinding } from '@ohos/flutter_ohos/src/main/ets/embedding/engine/plugins/FlutterPlugin';
+import {
+  FlutterPlugin,
+  FlutterPluginBinding
+} from '@ohos/flutter_ohos/src/main/ets/embedding/engine/plugins/FlutterPlugin';
+import MethodChannel from '@ohos/flutter_ohos/src/main/ets/plugin/common/MethodChannel';
+import { MethodCallHandler, MethodResult } from '@ohos/flutter_ohos/src/main/ets/plugin/common/MethodChannel';
+import MethodCall from '@ohos/flutter_ohos/src/main/ets/plugin/common/MethodCall';
+import Share from './Share';
+import MethodChannelHandlerImpl from './MethodChannelHandlerImpl';
+
 
 const TAG = "SharePlusOhosPlugin";
-const CHANNEL_NAME = 'dev.fluttercommunity.plus/share_info';
+const CHANNEL_NAME = 'dev.fluttercommunity.plus/share';
 
 export default class SharePlusOhosPlugin implements FlutterPlugin, AbilityAware {
-  private abilityPluginBinding: AbilityPluginBinding | null = null;
+  private context: common.Context | null = null;
+  private methodChannel: MethodChannel | null = null;
+  private methodChannelHandlerImpl: MethodChannelHandlerImpl | null = null;
+  private share: Share | null = null
 
   getUniqueClassName(): string {
     return TAG;
   }
 
+  onAttachedToAbility(binding: AbilityPluginBinding) {
+    this.share?.setAbility(binding.getAbility())
+  }
+
+  onDetachedFromAbility() {
+    this.share?.setAbility(null)
+  }
+
   onAttachedToEngine(binding: FlutterPluginBinding): void {
-    throw new Error('Method not implemented.');
+    this.methodChannel = new MethodChannel(binding.getBinaryMessenger(), CHANNEL_NAME);
+    this.share = new Share(binding.getApplicationContext())
+    this.methodChannelHandlerImpl = new MethodChannelHandlerImpl(this.share)
+    this.methodChannel.setMethodCallHandler(this.methodChannelHandlerImpl);
   }
 
   onDetachedFromEngine(binding: FlutterPluginBinding): void {
-    throw new Error('Method not implemented.');
+    this.methodChannel?.setMethodCallHandler(null);
+    this.methodChannel = null
   }
-
-  onAttachedToAbility(binding: AbilityPluginBinding): void {
-    throw new Error('Method not implemented.');
-  }
-
-  onDetachedFromAbility(): void {
-    throw new Error('Method not implemented.');
-  }
-
 }
