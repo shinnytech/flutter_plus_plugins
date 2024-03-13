@@ -1,24 +1,40 @@
-import common from '@ohos.app.ability.common'
+/*
+* Copyright (c) 2023 Hunan OpenValley Digital Industry Development Co., Ltd.
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+*     http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*/
+
+import { Log } from '@ohos/flutter_ohos';
+import common from '@ohos.app.ability.common';
 import UIAbility from '@ohos.app.ability.UIAbility';
-import list from '@ohos.util.List';
-import ArrayList from '@ohos.util.ArrayList';
+import List from '@ohos.util.List';
 import fs from '@ohos.file.fs';
 import { fileUri } from '@kit.CoreFileKit';
 import { MethodResult } from '@ohos/flutter_ohos/src/main/ets/plugin/common/MethodChannel';
-import Want from '@ohos.app.ability.Want';;
-import wantConstant from '@ohos.app.ability.wantConstant';
+import systemShare from '@hms.collaboration.systemShare';
+import uniformTypeDescriptor from '@ohos.data.uniformTypeDescriptor';
+
+const TAG = 'Share';
 
 export default class Share {
   public context: common.Context | null = null;
   public ability?: UIAbility | null = null;
 
   constructor(context: common.Context, ability?: UIAbility) {
-    this.context = context
-    this.ability = ability
+    this.context = context;
   }
 
   public setAbility(ability: UIAbility | null): void {
-    this.ability = ability
+    this.ability = ability;
   }
 
   private shareCacheFolder(): string {
@@ -26,139 +42,131 @@ export default class Share {
   }
 
   public async share(text: string, subject: string | null, withResult: boolean, result: MethodResult): Promise<void> {
-    let want: Want = {
-      flags: wantConstant.Flags.FLAG_AUTH_WRITE_URI_PERMISSION | wantConstant.Flags.FLAG_AUTH_READ_URI_PERMISSION,
-      action: 'ohos.want.action.sendData',
-      parameters: {
-        'text': text,
-        'subject': subject!
-      }
+    let record: systemShare.SharedRecord = {
+      utd: uniformTypeDescriptor.getUniformDataTypeByMIMEType('text/plain'),
+      content: text,
+      title: subject!
     }
-    await this.startAbility(want, withResult)
+    let data = new systemShare.SharedData(record);
+    this.startShare(data, withResult, result);
   }
+
 
   public async shareFiles(paths: List<string>, mimeTypes: List<string> | null, text: string, subject: string | null, withResult: boolean, result: MethodResult): Promise<void> {
     this.clearShareCacheFolder()
     let fileUris = await this.getUrisForPaths(paths)
-    let want: Want;
-    if (fileUris.length == 0 && text.length !== 0) {
-      this.share(text, subject, withResult, result)
-      return
-    } else if (fileUris.length == 1) {
-      let mimeType: string;
-      if (mimeTypes && mimeTypes.length != 0) {
-        mimeType = mimeTypes[0]
+    try {
+      let data: systemShare.SharedData | null = null;
+      if (fileUris.length == 0 && text.length !== 0) {
+        this.share(text, subject, withResult, result)
+        return
+      } else if (fileUris.length == 1) {
+        let record: systemShare.SharedRecord = {
+          utd: uniformTypeDescriptor.getUniformDataTypeByMIMEType(mimeTypes![0]),
+          uri: fileUris[0],
+          content: text,
+          title: subject!
+        }
+        data = new systemShare.SharedData(record);
       } else {
-        mimeType = "*/*"
-      }
-      want = {
-        flags: wantConstant.Flags.FLAG_AUTH_WRITE_URI_PERMISSION | wantConstant.Flags.FLAG_AUTH_READ_URI_PERMISSION,
-        action: 'ohos.want.action.sendData',
-        type: mimeType,
-        uri: fileUris[0],
-        parameters: {
-          'text': text,
-          'subject': subject!
+        if (text) {
+          let record: systemShare.SharedRecord = {
+            utd: uniformTypeDescriptor.getUniformDataTypeByMIMEType('text/plain'),
+            content: text,
+            title: subject!
+          }
+          data = new systemShare.SharedData(record);
         }
+        fileUris.forEach((uri: string, index: number) => {
+          let record: systemShare.SharedRecord = {
+            utd: uniformTypeDescriptor.getUniformDataTypeByMIMEType(mimeTypes![index]),
+            uri: uri,
+          }
+          if (data) {
+            data.addRecord(record);
+          } else {
+            data = new systemShare.SharedData(record);
+          }
+        })
       }
-    } else {
-      //   TODO: 分享多个文件
-      want = {
-        flags: wantConstant.Flags.FLAG_AUTH_WRITE_URI_PERMISSION | wantConstant.Flags.FLAG_AUTH_READ_URI_PERMISSION,
-        action: 'ohos.want.action.sendData',
-        type: this.reduceMimeTypes(mimeTypes),
-        // uri: fileUris,
-        parameters: {
-          'text': text,
-          'subject': subject!
-        }
-      }
+      this.startShare(data!, withResult, result);
+    } catch (err) {
+      Log.e(TAG, 'err:' + JSON.stringify(err));
     }
-    await this.startAbility(want, withResult, result)
   }
 
-  public async startAbility(want: Want, withResult: boolean, result?: MethodResult): Promise<void> {
-    if (this.ability != null) {
+  private startShare(data: systemShare.SharedData, withResult: boolean, result: MethodResult): void {
+    try {
+      let controller = new systemShare.ShareController(data);
       if (withResult) {
-        let abilityResult = await this.ability?.context.startAbilityForResult(want);
-        let resultWant = abilityResult?.want
-        result?.success(`${resultWant?.bundleName}/${resultWant?.abilityName}`)
-      } else {
-        await this.ability?.context?.startAbility(want);
+        controller.on('dismiss', () => {
+          result.success('');
+        });
       }
-    } else {
-      //   TODO
+      controller.show(this.ability?.context, {
+        previewMode: systemShare.SharePreviewMode.DETAIL,
+        selectionMode: systemShare.SelectionMode.BATCH
+      });
+    } catch (err) {
+      Log.e(TAG, 'err:' + JSON.stringify(err));
     }
   }
 
-  private async getUrisForPaths(paths: list<string>): Promise<ArrayList<string>> {
-    let uris = new ArrayList<string>()
-    paths.forEach(async path => {
-      let file: string;
-      //   TODO
-      if (this.fileIsInShareCache(path)) {
-        throw new Error(`Shared file can not be located in '${this.shareCacheFolder()}`)
-      }
-      file = await this.copyToShareCacheFolder(path)
-      uris.add(fileUri.getUriFromPath(file))
-    })
+  private async getUrisForPaths(paths: List<string>): Promise<Array<string>> {
+    let uris = new Array<string>();
+    try {
+      paths.forEach(async path => {
+        let file: string;
+        if (this.fileIsInShareCache(path)) {
+          throw new Error(`Shared file can not be located in '${this.shareCacheFolder()}`);
+        }
+        file = await this.copyToShareCacheFolder(path);
+        uris.push(fileUri.getUriFromPath(file));
+      })
+    } catch (err) {
+      Log.e(TAG, 'err:' + JSON.stringify(err));
+    }
     return uris
   }
 
   public fileIsInShareCache(file: string): boolean {
-    return false
-  }
-
-  private reduceMimeTypes(mimeTypes: list<string> | null): string {
-    if (mimeTypes == null) {
-      return "*/*"
-    }
-    if (mimeTypes != null && mimeTypes.length == 1) {
-      return mimeTypes[0]
-    }
-    let commonMimeType: string = mimeTypes && mimeTypes[0]
-    for (let i = 0; i < mimeTypes.length; i++) {
-      if (commonMimeType != mimeTypes[i]) {
-        if (this.getMimeTypeBase(commonMimeType) == this.getMimeTypeBase(mimeTypes[i])) {
-          commonMimeType = this.getMimeTypeBase(mimeTypes[i] + "/*")
-        } else {
-          commonMimeType = "*/*"
-          break
-        }
+    try {
+      let filePath: fs.File = fs.openSync(file);
+      let filePathFold = filePath.getParent();
+      if (filePathFold.startsWith(this.shareCacheFolder())) {
+        return true;
       }
+    } catch (err) {
+      Log.e(TAG, 'err:' + JSON.stringify(err));
     }
-    return commonMimeType
-  }
-
-  private getMimeTypeBase(mimeType: string): string {
-    if (mimeType == null || !mimeType.includes('/')) {
-      return "*"
-    } else {
-      return mimeType.substring(0, mimeType.indexOf("/"))
-    }
+    return false;
   }
 
   private async clearShareCacheFolder(): Promise<void> {
-    let folder: string = this.shareCacheFolder()
-    if (fs.accessSync(folder)) {
-      let files = fs.listFileSync(folder)
-      if (files.length > 0) {
-        files.forEach(item => {
-          fs.unlinkSync(folder + '/' + item)
-        })
-        fs.rmdirSync(folder)
+    try {
+      let folder: string = this.shareCacheFolder();
+      if (fs.accessSync(folder)) {
+        let files = fs.listFileSync(folder);
+        if (files.length > 0) {
+          files.forEach(item => {
+            fs.unlinkSync(folder + '/' + item);
+          })
+          fs.rmdirSync(folder);
+        }
       }
+    } catch (err) {
+      Log.e(TAG, 'err:' + JSON.stringify(err));
     }
   }
 
   private async copyToShareCacheFolder(file: string): Promise<string> {
-    let folder = this.shareCacheFolder()
+    let folder = this.shareCacheFolder();
     if (!fs.accessSync(folder)) {
-      fs.mkdirSync(folder)
+      fs.mkdirSync(folder);
     }
     let oldFile: fs.File = fs.openSync(file);
-    let newFile = folder + '/' + oldFile.name
-    fs.copyFileSync(oldFile.fd, newFile)
+    let newFile = folder + '/' + oldFile.name;
+    fs.copyFileSync(oldFile.fd, newFile);
     return newFile
   }
 }
