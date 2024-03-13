@@ -37,10 +37,6 @@ export default class Share {
     this.ability = ability;
   }
 
-  private shareCacheFolder(): string {
-    return this.context?.cacheDir + '/share_plus';
-  }
-
   public async share(text: string, subject: string | null, withResult: boolean, result: MethodResult): Promise<void> {
     let record: systemShare.SharedRecord = {
       utd: uniformTypeDescriptor.getUniformDataTypeByMIMEType('text/plain'),
@@ -50,7 +46,6 @@ export default class Share {
     let data = new systemShare.SharedData(record);
     this.startShare(data, withResult, result);
   }
-
 
   public async shareFiles(paths: List<string>, mimeTypes: List<string> | null, text: string, subject: string | null, withResult: boolean, result: MethodResult): Promise<void> {
     this.clearShareCacheFolder()
@@ -112,6 +107,10 @@ export default class Share {
     }
   }
 
+  private shareCacheFolder(): string {
+    return this.context?.cacheDir + '/share_plus';
+  }
+
   private async getUrisForPaths(paths: List<string>): Promise<Array<string>> {
     let uris = new Array<string>();
     try {
@@ -129,7 +128,7 @@ export default class Share {
     return uris
   }
 
-  public fileIsInShareCache(file: string): boolean {
+  private fileIsInShareCache(file: string): boolean {
     try {
       let filePath: fs.File = fs.openSync(file);
       let filePathFold = filePath.getParent();
