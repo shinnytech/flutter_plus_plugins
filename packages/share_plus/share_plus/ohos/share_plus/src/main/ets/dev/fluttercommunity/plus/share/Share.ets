@@ -13,7 +13,7 @@
 * limitations under the License.
 */
 
-import { Log } from '@ohos/flutter_ohos';
+import Log from '@ohos/flutter_ohos/src/main/ets/util/Log';
 import common from '@ohos.app.ability.common';
 import UIAbility from '@ohos.app.ability.UIAbility';
 import List from '@ohos.util.List';
@@ -38,6 +38,7 @@ export default class Share {
   }
 
   public async share(text: string, subject: string | null, withResult: boolean, result: MethodResult): Promise<void> {
+    Log.i(TAG, "share");
     let record: systemShare.SharedRecord = {
       utd: uniformTypeDescriptor.getUniformDataTypeByMIMEType('text/plain'),
       content: text,
@@ -48,6 +49,7 @@ export default class Share {
   }
 
   public async shareFiles(paths: List<string>, mimeTypes: List<string> | null, text: string, subject: string | null, withResult: boolean, result: MethodResult): Promise<void> {
+    Log.i(TAG, "shareFiles");
     this.clearShareCacheFolder()
     let fileUris = await this.getUrisForPaths(paths)
     try {
@@ -57,7 +59,7 @@ export default class Share {
         return
       } else if (fileUris.length == 1) {
         let record: systemShare.SharedRecord = {
-          utd: uniformTypeDescriptor.getUniformDataTypeByMIMEType(mimeTypes![0]),
+          utd: this.getUniformTypeDescriptor(fileUris![0]),
           uri: fileUris[0],
           content: text,
           title: subject!
@@ -74,7 +76,7 @@ export default class Share {
         }
         fileUris.forEach((uri: string, index: number) => {
           let record: systemShare.SharedRecord = {
-            utd: uniformTypeDescriptor.getUniformDataTypeByMIMEType(mimeTypes![index]),
+            utd: this.getUniformTypeDescriptor(uri),
             uri: uri,
           }
           if (data) {
@@ -91,6 +93,7 @@ export default class Share {
   }
 
   private startShare(data: systemShare.SharedData, withResult: boolean, result: MethodResult): void {
+    Log.i(TAG, "startShare");
     try {
       let controller = new systemShare.ShareController(data);
       if (withResult) {
@@ -107,11 +110,22 @@ export default class Share {
     }
   }
 
+  private getUniformTypeDescriptor(fileUri: string): string {
+    const dotIndex = fileUri.lastIndexOf('.');
+    if(dotIndex != -1){
+      const fileExtension = '.' + fileUri.substring(dotIndex+1);
+      return uniformTypeDescriptor.getUniformDataTypeByFilenameExtension(fileExtension) ?? 'general.file';
+    }
+    return 'general.file';
+  }
+
   private shareCacheFolder(): string {
+    Log.i(TAG, "shareCacheFolder");
     return this.context?.cacheDir + '/share_plus';
   }
 
   private async getUrisForPaths(paths: List<string>): Promise<Array<string>> {
+    Log.i(TAG, "getUrisForPaths");
     let uris = new Array<string>();
     try {
       paths.forEach(async path => {
@@ -129,6 +143,7 @@ export default class Share {
   }
 
   private fileIsInShareCache(file: string): boolean {
+    Log.i(TAG, "fileIsInShareCache");
     try {
       let filePath: fs.File = fs.openSync(file);
       let filePathFold = filePath.getParent();
@@ -142,6 +157,7 @@ export default class Share {
   }
 
   private async clearShareCacheFolder(): Promise<void> {
+    Log.i(TAG, "clearShareCacheFolder");
     try {
       let folder: string = this.shareCacheFolder();
       if (fs.accessSync(folder)) {
@@ -159,6 +175,7 @@ export default class Share {
   }
 
   private async copyToShareCacheFolder(file: string): Promise<string> {
+    Log.i(TAG, "copyToShareCacheFolder");
     let folder = this.shareCacheFolder();
     if (!fs.accessSync(folder)) {
       fs.mkdirSync(folder);

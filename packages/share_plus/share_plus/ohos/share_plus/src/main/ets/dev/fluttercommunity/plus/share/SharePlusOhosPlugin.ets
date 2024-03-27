@@ -13,6 +13,7 @@
 * limitations under the License.
 */
 
+import Log from '@ohos/flutter_ohos/src/main/ets/util/Log';
 import AbilityAware from '@ohos/flutter_ohos/src/main/ets/embedding/engine/plugins/ability/AbilityAware';
 import {
   AbilityPluginBinding
@@ -38,14 +39,17 @@ export default class SharePlusOhosPlugin implements FlutterPlugin, AbilityAware 
   }
 
   onAttachedToAbility(binding: AbilityPluginBinding) {
+    Log.i(TAG, "onAttachedToAbility");
     this.share?.setAbility(binding.getAbility());
   }
 
   onDetachedFromAbility() {
+    Log.i(TAG, "onDetachedFromAbility");
     this.share?.setAbility(null);
   }
 
   onAttachedToEngine(binding: FlutterPluginBinding): void {
+    Log.i(TAG, "onAttachedToEngine");
     this.methodChannel = new MethodChannel(binding.getBinaryMessenger(), CHANNEL_NAME);
     this.share = new Share(binding.getApplicationContext());
     this.methodChannelHandlerImpl = new MethodChannelHandlerImpl(this.share);
@@ -53,6 +57,7 @@ export default class SharePlusOhosPlugin implements FlutterPlugin, AbilityAware 
   }
 
   onDetachedFromEngine(binding: FlutterPluginBinding): void {
+    Log.i(TAG, "onDetachedFromEngine");
     this.methodChannel?.setMethodCallHandler(null);
     this.methodChannel = null;
   }

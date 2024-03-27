@@ -13,7 +13,7 @@
 * limitations under the License.
 */
 
-import { Log } from '@ohos/flutter_ohos'
+import Log from '@ohos/flutter_ohos/src/main/ets/util/Log';
 import { MethodCall } from '@ohos/flutter_ohos';
 import { MethodCallHandler, MethodResult } from '@ohos/flutter_ohos/src/main/ets/plugin/common/MethodChannel';
 import Share from './Share';
@@ -28,6 +28,7 @@ export default class MethodCallHandlerImpl implements MethodCallHandler {
   }
 
   onMethodCall(call: MethodCall, result: MethodResult): void {
+    Log.i(TAG, "onMethodCall step in");
     let method: string = call.method;
     Log.i(TAG, "Received '" + method + "' message.");
     const isWithResult = call.method.endsWith('WithResult');

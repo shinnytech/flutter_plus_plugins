@@ -6,8 +6,27 @@ dependencies:
     sdk: flutter
   share_plus:
     path: ../
-  image_picker: ^1.0.0
-  file_selector: ^1.0.0
+    # git:
+    #   url: "https://gitee.com/hxy-111/flutter_plus_plugins.git"
+    #   path: "packages/share_plus/share_plus"
+  image_picker:
+    git:
+      url: "https://gitee.com/openharmony-sig/flutter_packages.git"
+      path: "packages/image_picker/image_picker"
+  file_selector:
+    git:
+      url: "https://gitee.com/openharmony-sig/flutter_packages.git"
+      path: "packages/file_selector/file_selector"
+  path_provider:
+    git:
+      url: "https://gitee.com/openharmony-sig/flutter_packages.git"
+      path: "packages/path_provider/path_provider"
+
+dependency_overrides:
+  path_provider:
+    git:
+      url: "https://gitee.com/openharmony-sig/flutter_packages.git"
+      path: "packages/path_provider/path_provider"
 
 dev_dependencies:
   flutter_driver:
