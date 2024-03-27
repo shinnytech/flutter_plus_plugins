@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # Copyright (c) 2023 Hunan OpenValley Digital Industry Development Co., Ltd.
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -11,15 +13,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-#!/bin/bash
-
 # ----------------------------------------------------------------------------
 #  Hvigor startup script, version 1.0.0
-# 
+#
 #  Required ENV vars:
 #  ------------------
 #    NODE_HOME - location of a Node home dir
-#    or 
+#    or
 #    Add /usr/local/nodejs/bin to the PATH environment variable
 # ----------------------------------------------------------------------------
 
