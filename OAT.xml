@@ -131,6 +131,12 @@
                 <filteritem type='filepath' name="packages/device_info_plus/device_info_plus/example/ohos/dta/icudtl.dat" desc='二进制文件,不影响兼容性'/>
                 <filteritem type='filepath' name="packages/device_info_plus/device_info_plus/example/ohos/entry/libs/arm64-v8a/libc++_shared.so" desc='二进制文件,不影响兼容性'/>
 
+                <filteritem type="filepath" name="packages/share_plus/share_plus/example/ohos/hvigorw.bat" desc="hvigorw编译程序，不影响兼容性"/>
+                <filteritem type="filepath" name="packages/share_plus/share_plus/example/ohos/hvigor/hvigor-wrapper.js" desc="hvigorw编译程序，不影响兼容性"/>
+                <filteritem type="filepath" name="packages/share_plus/share_plus/ohos/hvigor/hvigor-wrapper.js" desc="hvigorw编译程序，不影响兼容性"/>
+                <filteritem type='filepath' name="packages/share_plus/share_plus/example/ohos/dta/icudtl.dat" desc='二进制文件,不影响兼容性'/>
+                <filteritem type='filepath' name="packages/share_plus/share_plus/example/ohos/entry/libs/arm64-v8a/libc++_shared.so" desc='二进制文件,不影响兼容性'/>
+
             </filefilter>
             <filefilter name="defaultPolicyFilter" desc="Filters for compatibility，license header policies">
                 <filteritem type='filepath' name="packages/pigeon/example/app/ohos/entry/src/main/ets/plugins/Messages.ets" desc='BSDStyleLicense,不影响兼容性'/>
