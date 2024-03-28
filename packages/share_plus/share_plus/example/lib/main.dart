@@ -99,7 +99,7 @@ class DemoAppState extends State<DemoApp> {
                       (Platform.isMacOS ||
                           Platform.isLinux ||
                           Platform.isWindows ||
-                          Platform.isOhos)) {
+                          defaultTargetPlatform == TargetPlatform.ohos)) {
                     // Using `package:file_selector` on windows, macos & Linux, since `package:image_picker` is not supported.
                     const XTypeGroup typeGroup = XTypeGroup(
                       label: 'images',
