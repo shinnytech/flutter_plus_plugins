@@ -21,6 +21,11 @@ dependencies:
       url: "https://gitee.com/hxy-111/flutter_packages.git"
       path: "packages/path_provider/path_provider"
 
+dependency_overrides:
+  path_provider:
+    git:
+      url: "https://gitee.com/hxy-111/flutter_packages.git"
+      path: "packages/path_provider/path_provider"
 
 dev_dependencies:
   flutter_driver:
