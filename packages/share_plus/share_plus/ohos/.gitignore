@@ -1,0 +1,16 @@
+/node_modules
+/oh_modules
+/local.properties
+/.idea
+**/build
+/.hvigor
+.cxx
+/.clangd
+/.clang-format
+/.clang-tidy
+**/.test
+share_plus/libs/arm64-v8a/libapp.so
+share_plus/libs/arm64-v8a/libflutter.so
+share_plus/libs/arm64-v8a/libvmservice_snapshot.so
+share_plus/src/main/resources/rawfile/flutter_assets/
+har/flutter.har

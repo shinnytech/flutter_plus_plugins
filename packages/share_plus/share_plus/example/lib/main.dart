@@ -98,11 +98,63 @@ class DemoAppState extends State<DemoApp> {
                   if (!kIsWeb &&
                       (Platform.isMacOS ||
                           Platform.isLinux ||
-                          Platform.isWindows)) {
+                          Platform.isWindows ||
+                          defaultTargetPlatform == TargetPlatform.ohos)) {
                     // Using `package:file_selector` on windows, macos & Linux, since `package:image_picker` is not supported.
                     const XTypeGroup typeGroup = XTypeGroup(
                       label: 'images',
-                      extensions: <String>['jpg', 'jpeg', 'png', 'gif'],
+                      extensions: <String>[
+                        'acc',
+                        'aiff',
+                        'aif',
+                        'flac',
+                        'm4a',
+                        'mp3',
+                        'ogg',
+                        'wav',
+                        'wma',
+                        'bmp',
+                        'gif',
+                        'jpeg',
+                        'jpg',
+                        'png',
+                        'raw',
+                        'svg',
+                        'json',
+                        'TIFF',
+                        'tif',
+                        'webp',
+                        'csv',
+                        'xls',
+                        'xlsx',
+                        'docx',
+                        'doc',
+                        'html',
+                        'ini',
+                        'json',
+                        'md',
+                        'pdf',
+                        'pptx',
+                        'PPT',
+                        'rtf',
+                        'txt',
+                        'xml',
+                        '3gp',
+                        'avi',
+                        'flv',
+                        'mkv',
+                        'mov',
+                        'mp4',
+                        'mpeg',
+                        'mpg',
+                        'webm',
+                        'wmv',
+                        '7z',
+                        'gz',
+                        'rar',
+                        'tar',
+                        'zip'
+                      ],
                     );
                     final file = await openFile(
                         acceptedTypeGroups: <XTypeGroup>[typeGroup]);
