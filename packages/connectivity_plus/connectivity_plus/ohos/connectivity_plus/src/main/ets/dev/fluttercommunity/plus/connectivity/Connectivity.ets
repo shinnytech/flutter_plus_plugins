@@ -30,14 +30,11 @@ export class Connectivity {
 
   }
 
-
-  getNetworkType(): String {
+  async getNetworkType(): Promise<String> {
     //通过异步方式获取网络信息
-    connection.getDefaultNet().then((netHandle) => {
-      connection.getNetCapabilities(netHandle).then((capabilities) => {
-        this.networkType = this.hasTransport(capabilities.bearerTypes);
-      });
-    })
+    const netHandle = await connection.getDefaultNet()
+    const capabilities = await connection.getNetCapabilities(netHandle)
+    this.networkType = this.hasTransport(capabilities.bearerTypes);
     return this.networkType;
   }
 
