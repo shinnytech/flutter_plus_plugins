@@ -21,6 +21,5 @@
   "author": "",
   "license": "Apache-2.0",
   "devDependencies": {
-    "@ohos/flutter_ohos": "file:./libs/flutter.har"
   }
 }
