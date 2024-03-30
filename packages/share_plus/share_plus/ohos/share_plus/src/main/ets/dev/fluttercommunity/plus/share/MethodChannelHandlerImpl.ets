@@ -31,7 +31,7 @@ export default class MethodCallHandlerImpl implements MethodCallHandler {
     Log.i(TAG, "onMethodCall step in");
     let method: string = call.method;
     Log.i(TAG, "Received '" + method + "' message.");
-    const isWithResult = call.method.endsWith('WithResult');
+    const isWithResult: boolean = call.method.endsWith('WithResult');
     try {
       switch (method) {
         case 'shareUri':
