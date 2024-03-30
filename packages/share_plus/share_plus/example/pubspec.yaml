@@ -5,7 +5,10 @@ dependencies:
   flutter:
     sdk: flutter
   share_plus:
-    path: ../
+    git:
+      url: https://gitee.com/hxy-111/flutter_plus_plugins.git
+      ref: master
+      path: packages/share_plus/share_plus
   image_picker:
     git:
       url: https://gitee.com/openharmony-sig/flutter_packages.git
