@@ -32,23 +32,23 @@ export class ConnectivityBroadcastReceiver implements StreamHandler {
   onListen(args: Object, events: EventSink): void {
     this.events = events;
 
-    Connectivity.netConnection.register((error) => {
-      this.sendEvent(this.connectivity.getNetworkType())
+    Connectivity.netConnection.register(async (error) => {
+      this.sendEvent(await this.connectivity.getNetworkType())
     })
 
     //订阅网络可用事件。
-    Connectivity.netConnection.on('netAvailable', (data) => {
-      this.sendEvent(this.connectivity.getNetworkType())
+    Connectivity.netConnection.on('netAvailable', async (data) => {
+      this.sendEvent(await this.connectivity.getNetworkType())
     })
 
     //订阅网络能力变化事件。
-    Connectivity.netConnection.on('netCapabilitiesChange', (data) => {
-      this.sendEvent(this.connectivity.getNetworkType())
+    Connectivity.netConnection.on('netCapabilitiesChange', async (data) => {
+      this.sendEvent(await this.connectivity.getNetworkType())
     })
 
     //订阅网络连接信息变化事件
-    Connectivity.netConnection.on('netConnectionPropertiesChange', (data) => {
-      this.sendEvent(this.connectivity.getNetworkType())
+    Connectivity.netConnection.on('netConnectionPropertiesChange', async (data) => {
+      this.sendEvent(await this.connectivity.getNetworkType())
     })
 
     //订阅网络订阅网络丢失事件。

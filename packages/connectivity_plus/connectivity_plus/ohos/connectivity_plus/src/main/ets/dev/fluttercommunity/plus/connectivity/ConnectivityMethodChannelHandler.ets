@@ -32,14 +32,18 @@ export default class ConnectivityMethodChannelHandler implements MethodCallHandl
     Log.d(TAG, 'onMethodCall step in')
     switch (call.method) {
       case "check":
-        result.success(this.connectivity.getNetworkType());
+        this.handleCheckResult(result);
         break;
       default:
         result.notImplemented();
         break;
     }
   }
+
+  async handleCheckResult(result: MethodResult): Promise<void> {
+    const networkType: String = await this.connectivity.getNetworkType()
+    Log.d(TAG, 'handleCheckResult with result: ${networkType}')
+    result.success(networkType)
+  }
 }
-
-
 
