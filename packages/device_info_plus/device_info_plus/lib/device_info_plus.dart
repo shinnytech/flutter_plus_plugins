@@ -114,7 +114,7 @@ class DeviceInfoPlugin {
         return linuxInfo;
       } else if (Platform.isMacOS) {
         return macOsInfo;
-      } else if (Platform.isOhos) {
+      } else if (Platform.operatingSystem == "ohos") {
         return ohosInfo;
       } else if (Platform.isWindows) {
         return windowsInfo;
