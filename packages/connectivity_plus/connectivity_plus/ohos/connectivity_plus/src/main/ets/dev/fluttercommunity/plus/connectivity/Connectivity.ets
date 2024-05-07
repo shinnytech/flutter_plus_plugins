@@ -32,8 +32,11 @@ export class Connectivity {
 
   async getNetworkType(): Promise<String> {
     //通过异步方式获取网络信息
-    const netHandle = await connection.getDefaultNet()
-    const capabilities = await connection.getNetCapabilities(netHandle)
+    const netHandle = await connection.getDefaultNet();
+    if (netHandle.netId == 0) {
+      return Connectivity.CONNECTIVITY_NONE;
+    }
+    const capabilities = await connection.getNetCapabilities(netHandle);
     this.networkType = this.hasTransport(capabilities.bearerTypes);
     return this.networkType;
   }
