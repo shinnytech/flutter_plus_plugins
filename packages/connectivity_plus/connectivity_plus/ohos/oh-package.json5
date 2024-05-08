@@ -18,10 +18,8 @@
   "description": "Please describe the basic information.",
   "main": "",
   "author": "",
-  "license": "",
+  "license": "Apache-2.0",
   "dependencies": {
-  },
-  "devDependencies": {
-    "@ohos/hypium": "1.0.6"
+    "@ohos/flutter_ohos": "file:./libs/flutter_embedding.har"
   }
 }
