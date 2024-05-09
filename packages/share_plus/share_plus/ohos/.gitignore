@@ -9,7 +9,9 @@
 /.clang-format
 /.clang-tidy
 **/.test
-share_plus/libs/arm64-v8a/libapp.so
-share_plus/libs/arm64-v8a/libflutter.so
-share_plus/libs/arm64-v8a/libvmservice_snapshot.so
-share_plus/src/main/resources/rawfile/flutter_assets/
+
+/entry/libs/arm64-v8a/libflutter.so
+/entry/src/main/resources/rawfile/flutter_assets
+**.har
+**/oh-package-lock.json5
+BuildProfile.ets
