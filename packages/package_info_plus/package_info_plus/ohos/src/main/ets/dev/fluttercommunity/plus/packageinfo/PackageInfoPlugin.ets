@@ -66,8 +66,9 @@ export class PackageInfoPlugin implements FlutterPlugin,MethodCallHandler{
 
                const infoMap = new Map<string,string>();
                const buildSignature = bundleManage.signatureInfo.fingerprint;
-               infoMap.set("appName",appInfo.name);
-               Log.d(TAG,'onMethodCall packageInfo plugin appName '+appInfo.name)
+               const appName = this.applicationContext?.resourceManager.getStringSync(appInfo.labelId) ?? '';
+               infoMap.set("appName", appName);
+               Log.d(TAG,'onMethodCall packageInfo plugin appName '+ appName);
                infoMap.set("packageName",bundleManage.name);
                Log.d(TAG,'onMethodCall packageInfo plugin packageName '+bundleManage.name)
                infoMap.set("version",bundleManage.versionName);
