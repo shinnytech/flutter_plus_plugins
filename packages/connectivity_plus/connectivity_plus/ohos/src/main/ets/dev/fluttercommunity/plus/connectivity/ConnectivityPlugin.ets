@@ -39,10 +39,8 @@ export default class ConnectivityPlugin implements FlutterPlugin {
   onAttachedToEngine(binding: FlutterPluginBinding): void {
     Log.d(TAG, 'onAttachedToEngine connectivity plugin')
 
-    let taskQueue = binding.getBinaryMessenger().makeBackgroundTaskQueue();
-
-    this.methodChannel = new MethodChannel(binding.getBinaryMessenger(), "dev.fluttercommunity.plus/connectivity", StandardMethodCodec.INSTANCE, taskQueue);
-    this.eventChannel = new EventChannel(binding.getBinaryMessenger(), "dev.fluttercommunity.plus/connectivity_status", StandardMethodCodec.INSTANCE, taskQueue);
+    this.methodChannel = new MethodChannel(binding.getBinaryMessenger(), "dev.fluttercommunity.plus/connectivity", StandardMethodCodec.INSTANCE);
+    this.eventChannel = new EventChannel(binding.getBinaryMessenger(), "dev.fluttercommunity.plus/connectivity_status", StandardMethodCodec.INSTANCE);
 
     let connectivity = new Connectivity();
     let methodChannelHandler = new ConnectivityMethodChannelHandler(connectivity);
