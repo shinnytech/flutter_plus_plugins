@@ -54,6 +54,7 @@ class OhosDeviceInfo extends BaseDeviceInfo {
     required this.distributionOSVersion,
     required this.distributionOSApiVersion,
     required this.distributionOSReleaseType,
+    required this.odID,
   }) : super(data);
 
   final String? deviceType;
@@ -90,6 +91,7 @@ class OhosDeviceInfo extends BaseDeviceInfo {
   final String? distributionOSVersion;
   final int? distributionOSApiVersion;
   final String? distributionOSReleaseType;
+  final String? odID;
 
   /// Constructs a [OhosDeviceInfo] from a Map of dynamic.
   static OhosDeviceInfo fromMap(Map<String, dynamic> map) {
@@ -129,6 +131,7 @@ class OhosDeviceInfo extends BaseDeviceInfo {
       distributionOSVersion: map['distributionOSVersion'],
       distributionOSApiVersion: map['distributionOSApiVersion'],
       distributionOSReleaseType: map['distributionOSReleaseType'],
+      odID: map['ODID'],
     );
   }
 }
