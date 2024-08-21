@@ -232,6 +232,7 @@ class _MyAppState extends State<MyApp> {
       'distributionOSVersion': data.distributionOSVersion,
       'distributionOSApiVersion': data.distributionOSApiVersion,
       'distributionOSReleaseType': data.distributionOSReleaseType,
+      'ODID': data.odID,
     };
   }
 

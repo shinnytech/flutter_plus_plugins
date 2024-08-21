@@ -95,6 +95,7 @@ export default class DeviceInfoPlusOhosPlugin implements FlutterPlugin, AbilityA
         data.set('distributionOSVersion', deviceInfo.distributionOSVersion);
         data.set('distributionOSApiVersion', deviceInfo.distributionOSApiVersion);
         data.set('distributionOSReleaseType', deviceInfo.distributionOSReleaseType);
+        data.set('ODID', deviceInfo.ODID);
         result.success(data);
         break;
       default:
