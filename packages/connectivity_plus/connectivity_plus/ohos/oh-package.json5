@@ -16,7 +16,7 @@
   "name": "connectivity_plus",
   "version": "1.0.0",
   "description": "Please describe the basic information.",
-  "main": "",
+  "main": "index.ets",
   "author": "",
   "license": "Apache-2.0",
   "dependencies": {
