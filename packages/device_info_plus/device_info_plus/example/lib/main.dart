@@ -8,6 +8,7 @@ import 'dart:async';
 import 'dart:developer' as developer;
 
 import 'package:device_info_plus/device_info_plus.dart';
+import 'package:device_info_plus/device_info_plus_ohos.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -29,6 +30,8 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   static final DeviceInfoPlugin deviceInfoPlugin = DeviceInfoPlugin();
+  static final DeviceInfoOhosPlugin deviceInfoOhosPlugin =
+      DeviceInfoOhosPlugin();
   Map<String, dynamic> _deviceData = <String, dynamic>{};
 
   @override
@@ -44,21 +47,33 @@ class _MyAppState extends State<MyApp> {
       if (kIsWeb) {
         deviceData = _readWebBrowserInfo(await deviceInfoPlugin.webBrowserInfo);
       } else {
-        deviceData = switch (defaultTargetPlatform) {
-          TargetPlatform.android =>
-            _readAndroidBuildData(await deviceInfoPlugin.androidInfo),
-          TargetPlatform.iOS =>
-            _readIosDeviceInfo(await deviceInfoPlugin.iosInfo),
-          TargetPlatform.linux =>
-            _readLinuxDeviceInfo(await deviceInfoPlugin.linuxInfo),
-          TargetPlatform.windows =>
-            _readWindowsDeviceInfo(await deviceInfoPlugin.windowsInfo),
-          TargetPlatform.macOS =>
-            _readMacOsDeviceInfo(await deviceInfoPlugin.macOsInfo),
-          TargetPlatform.fuchsia => <String, dynamic>{
-              'Error:': 'Fuchsia platform isn\'t supported'
-            },
-        };
+        switch (defaultTargetPlatform) {
+          case TargetPlatform.android:
+            deviceData =
+                _readAndroidBuildData(await deviceInfoPlugin.androidInfo);
+            break;
+          case TargetPlatform.iOS:
+            deviceData = _readIosDeviceInfo(await deviceInfoPlugin.iosInfo);
+            break;
+          case TargetPlatform.linux:
+            deviceData = _readLinuxDeviceInfo(await deviceInfoPlugin.linuxInfo);
+            break;
+          case TargetPlatform.windows:
+            deviceData =
+                _readWindowsDeviceInfo(await deviceInfoPlugin.windowsInfo);
+            break;
+          case TargetPlatform.macOS:
+            deviceData = _readMacOsDeviceInfo(await deviceInfoPlugin.macOsInfo);
+            break;
+          case TargetPlatform.ohos:
+            deviceData = (await deviceInfoOhosPlugin.ohosDeviceInfo).data;
+            break;
+          default:
+            deviceData = <String, dynamic>{
+              'Error:': '$defaultTargetPlatform isn\'t supported'
+            };
+        }
+        ;
       }
     } on PlatformException {
       deviceData = <String, dynamic>{
@@ -252,14 +267,25 @@ class _MyAppState extends State<MyApp> {
     );
   }
 
-  String _getAppBarTitle() => kIsWeb
-      ? 'Web Browser info'
-      : switch (defaultTargetPlatform) {
-          TargetPlatform.android => 'Android Device Info',
-          TargetPlatform.iOS => 'iOS Device Info',
-          TargetPlatform.linux => 'Linux Device Info',
-          TargetPlatform.windows => 'Windows Device Info',
-          TargetPlatform.macOS => 'MacOS Device Info',
-          TargetPlatform.fuchsia => 'Fuchsia Device Info',
-        };
+  String _getAppBarTitle() {
+    if (kIsWeb) {
+      return 'Web Browser info';
+    }
+    switch (defaultTargetPlatform) {
+      case TargetPlatform.android:
+        return 'Android Device Info';
+      case TargetPlatform.ohos:
+        return 'Ohos Device Info';
+      case TargetPlatform.iOS:
+        return 'iOS Device Info';
+      case TargetPlatform.linux:
+        return 'Linux Device Info';
+      case TargetPlatform.windows:
+        return 'Windows Device Info';
+      case TargetPlatform.macOS:
+        return 'MacOS Device Info';
+      case TargetPlatform.fuchsia:
+        return 'Fuchsia Device Info';
+    }
+  }
 }

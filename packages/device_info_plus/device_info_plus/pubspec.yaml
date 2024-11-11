@@ -27,7 +27,8 @@ flutter:
         pluginClass: DeviceInfoPlusMacosPlugin
       windows:
         dartPluginClass: DeviceInfoPlusWindowsPlugin
-
+      ohos:
+        pluginClass: DeviceInfoPlusPlugin
 dependencies:
   device_info_plus_platform_interface: ^7.0.1
   ffi: ^2.0.1
