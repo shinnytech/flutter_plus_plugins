@@ -97,6 +97,7 @@ class MethodChannelShare extends SharePlatform {
     final params = <String, dynamic>{
       'paths': paths,
       'mimeTypes': mimeTypes,
+      "fileNameOverrides":fileNameOverrides
     };
 
     if (subject != null) params['subject'] = subject;

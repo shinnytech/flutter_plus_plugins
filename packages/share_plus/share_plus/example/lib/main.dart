@@ -63,9 +63,10 @@ class DemoAppState extends State<DemoApp> {
                   hintText: 'Enter some text and/or link to share',
                 ),
                 maxLines: null,
-                onChanged: (String value) => setState(() {
-                  text = value;
-                }),
+                onChanged: (String value) =>
+                    setState(() {
+                      text = value;
+                    }),
               ),
               const SizedBox(height: 16),
               TextField(
@@ -75,9 +76,10 @@ class DemoAppState extends State<DemoApp> {
                   hintText: 'Enter subject to share (optional)',
                 ),
                 maxLines: null,
-                onChanged: (String value) => setState(() {
-                  subject = value;
-                }),
+                onChanged: (String value) =>
+                    setState(() {
+                      subject = value;
+                    }),
               ),
               const SizedBox(height: 16),
               TextField(
@@ -112,7 +114,8 @@ class DemoAppState extends State<DemoApp> {
                   if (!kIsWeb &&
                       (Platform.isMacOS ||
                           Platform.isLinux ||
-                          Platform.isWindows)) {
+                          Platform.isWindows ||
+                          defaultTargetPlatform == TargetPlatform.ohos)) {
                     // Using `package:file_selector` on windows, macos & Linux, since `package:image_picker` is not supported.
                     const XTypeGroup typeGroup = XTypeGroup(
                       label: 'images',
@@ -146,8 +149,14 @@ class DemoAppState extends State<DemoApp> {
                 builder: (BuildContext context) {
                   return ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      foregroundColor: Theme.of(context).colorScheme.onPrimary,
-                      backgroundColor: Theme.of(context).colorScheme.primary,
+                      foregroundColor: Theme
+                          .of(context)
+                          .colorScheme
+                          .onPrimary,
+                      backgroundColor: Theme
+                          .of(context)
+                          .colorScheme
+                          .primary,
                     ),
                     onPressed: text.isEmpty && imagePaths.isEmpty
                         ? null
@@ -161,8 +170,14 @@ class DemoAppState extends State<DemoApp> {
                 builder: (BuildContext context) {
                   return ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      foregroundColor: Theme.of(context).colorScheme.onPrimary,
-                      backgroundColor: Theme.of(context).colorScheme.primary,
+                      foregroundColor: Theme
+                          .of(context)
+                          .colorScheme
+                          .onPrimary,
+                      backgroundColor: Theme
+                          .of(context)
+                          .colorScheme
+                          .primary,
                     ),
                     onPressed: () {
                       _onShareXFileFromAssets(context);
@@ -176,8 +191,14 @@ class DemoAppState extends State<DemoApp> {
                 builder: (BuildContext context) {
                   return ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      foregroundColor: Theme.of(context).colorScheme.onPrimary,
-                      backgroundColor: Theme.of(context).colorScheme.primary,
+                      foregroundColor: Theme
+                          .of(context)
+                          .colorScheme
+                          .onPrimary,
+                      backgroundColor: Theme
+                          .of(context)
+                          .colorScheme
+                          .primary,
                     ),
                     onPressed: fileName.isEmpty || text.isEmpty
                         ? null
