@@ -1,0 +1,11 @@
+[
+    {
+        "Name": "plus_plugins",
+        "License": "BSD-3-Clause License",
+        "License File": "LICENSE",
+        "Version Number": "03d05235233649e3a4f6344282dd5ab470d91bbc",
+        "Owner": "george.lihui@huawei.com",
+        "Upstream URL": "https://github.com/fluttercommunity/plus_plugins/",
+        "Description": "PlusPlugins is a set of Flutter plugins that is developed based on plugins, which previously existed as a part of Flutter plugins, with extra functionalities, support for more platforms and better maintenance."
+    }
+]
