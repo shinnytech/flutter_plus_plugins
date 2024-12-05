@@ -5,11 +5,5 @@
   "main": "",
   "author": "",
   "license": "",
-  "dependencies": {
-    "file_selector_ohos": "file:../har/file_selector_ohos.har",
-    "image_picker_ohos": "file:../har/image_picker_ohos.har",
-    "path_provider_ohos": "file:../har/path_provider_ohos.har",
-    "integration_test": "file:../har/integration_test.har",
-    "share_plus": "file:../har/share_plus.har"
-  }
+  "dependencies": {}
 }
