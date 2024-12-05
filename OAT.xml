@@ -93,51 +93,12 @@
                 <filteritem type="filepath" name="*/ohos/har/" desc="hvigor本地插件,不影响兼容性"/>
                 <filteritem type="filepath" name="*/ohos/entry/src/main/resources/rawfile/flutter_assets/" desc="资源文件，不影响兼容性"/>
                 <filteritem type="filepath" name="*/ohos/dta/icudtl.dat" desc="ohos字体库文件，不影响兼容性"/>
-                <filteritem type="filepath" name="*/ohos/hvigor/hvigor-wrapper.js" desc="hvigorw编译程序，不影响兼容性"/>
-                <filteritem type="filepath" name="*/ohos/hvigorw.bat" desc="hvigorw编译程序，不影响兼容性"/>
-
-                <filteritem type="filepath" name="*/ohos/har/har_product/flutter_embedding.har.profile.10" desc="二进制文件,不影响兼容性"/>
-                <filteritem type="filepath" name="*/ohos/har/flutter_embedding.har.debug.10" desc="二进制文件,不影响兼容性"/>
-                <filteritem type="filepath" name="*/ohos/har/flutter_embedding.har.release.10" desc="二进制文件,不影响兼容性"/>
-                <filteritem type="filepath" name="*/ohos/har/flutter_embedding.har.debug.9" desc="二进制文件,不影响兼容性"/>
-                <filteritem type="filepath" name="*/ohos/har/flutter_embedding.har.release.9" desc="二进制文件,不影响兼容性"/>
-                <filteritem type="filepath" name="*/ohos/har/har_product/flutter_embedding.har.debug.10" desc="二进制文件,不影响兼容性"/>
-                <filteritem type="filepath" name="*/ohos/har/har_product/flutter_embedding.har.release.10" desc="二进制文件,不影响兼容性"/>
-                <filteritem type="filepath" name="*/ohos/har/har_product/flutter_embedding.har.debug.9" desc="二进制文件,不影响兼容性"/>
-                <filteritem type="filepath" name="*/ohos/har/har_product/flutter_embedding.har.release.9" desc="二进制文件,不影响兼容性"/>
-                <filteritem type="filepath" name="*/ohos/har/har_product/libflutter.so.profile.10" desc="二进制文件,不影响兼容性"/>
-                <filteritem type="filepath" name="*/ohos/har/har_product/libflutter.so.release.10" desc="二进制文件,不影响兼容性"/>
-                <filteritem type="filepath" name="*/ohos/har/har_product/libflutter.so.debug.10" desc="二进制文件,不影响兼容性"/>
-
-                <filteritem type="filepath" name="packages/connectivity_plus/connectivity_plus/example/ohos/hvigorw.bat" desc="hvigorw编译程序，不影响兼容性"/>
-                <filteritem type="filepath" name="packages/connectivity_plus/connectivity_plus/example/ohos/hvigor/hvigor-wrapper.js" desc="hvigorw编译程序，不影响兼容性"/>
-                <filteritem type="filepath" name="packages/connectivity_plus/connectivity_plus/ohos/hvigor/hvigor-wrapper.js" desc="hvigorw编译程序，不影响兼容性"/>
-
-                <filteritem type='filepath' name="packages/connectivity_plus/connectivity_plus/ohos/dependencies/hvigor-ohos-arkui-x-plugin-2.3.0-s.tgz" desc='二进制文件,不影响兼容性'/>
-                <filteritem type='filepath' name="packages/connectivity_plus/connectivity_plus/ohos/dependencies/hvigor-ohos-plugin-3.2.1-s.tgz" desc='二进制文件,不影响兼容性'/>
-                <filteritem type='filepath' name="packages/connectivity_plus/connectivity_plus/ohos/dependencies/hvigor-3.2.1-s.tgz" desc='二进制文件,不影响兼容性'/>
-                <filteritem type='filepath' name="packages/connectivity_plus/connectivity_plus/example/ohos/har/flutter_embedding.har" desc='二进制文件,不影响兼容性'/>
                 <filteritem type='filepath' name="packages/connectivity_plus/connectivity_plus/example/ohos/dta/icudtl.dat" desc='二进制文件,不影响兼容性'/>
                 <filteritem type='filepath' name="packages/connectivity_plus/connectivity_plus/example/ohos/entry/libs/arm64-v8a/libc++_shared.so" desc='二进制文件,不影响兼容性'/>
-                <filteritem type='filepath' name="packages/connectivity_plus/connectivity_plus/example/ohos/har/connectivity_plus.har" desc='二进制文件,不影响兼容性'/>
-
-                <filteritem type="filepath" name="packages/device_info_plus/device_info_plus/example/ohos/hvigorw.bat" desc="hvigorw编译程序，不影响兼容性"/>
-                <filteritem type="filepath" name="packages/device_info_plus/device_info_plus/example/ohos/hvigor/hvigor-wrapper.js" desc="hvigorw编译程序，不影响兼容性"/>
-                <filteritem type="filepath" name="packages/device_info_plus/device_info_plus/ohos/hvigor/hvigor-wrapper.js" desc="hvigorw编译程序，不影响兼容性"/>
-                <filteritem type='filepath' name="packages/device_info_plus/device_info_plus/ohos/dependencies/hvigor-ohos-arkui-x-plugin-2.3.0-s.tgz" desc='二进制文件,不影响兼容性'/>
-                <filteritem type='filepath' name="packages/device_info_plus/device_info_plus/ohos/dependencies/hvigor-ohos-plugin-3.2.1-s.tgz" desc='二进制文件,不影响兼容性'/>
-                <filteritem type='filepath' name="packages/device_info_plus/device_info_plus/ohos/dependencies/hvigor-3.2.1-s.tgz" desc='二进制文件,不影响兼容性'/>
-                <filteritem type='filepath' name="packages/device_info_plus/device_info_plus/ohos/device_info_plus/libs/flutter_embedding.har" desc='二进制文件,不影响兼容性'/>
-                <filteritem type='filepath' name="packages/device_info_plus/device_info_plus/example/ohos/har/device_info_plus.har" desc='二进制文件,不影响兼容性'/>
                 <filteritem type='filepath' name="packages/device_info_plus/device_info_plus/example/ohos/dta/icudtl.dat" desc='二进制文件,不影响兼容性'/>
                 <filteritem type='filepath' name="packages/device_info_plus/device_info_plus/example/ohos/entry/libs/arm64-v8a/libc++_shared.so" desc='二进制文件,不影响兼容性'/>
-
-                <filteritem type="filepath" name="packages/share_plus/share_plus/example/ohos/hvigorw.bat" desc="hvigorw编译程序，不影响兼容性"/>
-                <filteritem type="filepath" name="packages/share_plus/share_plus/example/ohos/hvigor/hvigor-wrapper.js" desc="hvigorw编译程序，不影响兼容性"/>
-                <filteritem type="filepath" name="packages/share_plus/share_plus/ohos/hvigor/hvigor-wrapper.js" desc="hvigorw编译程序，不影响兼容性"/>
                 <filteritem type='filepath' name="packages/share_plus/share_plus/example/ohos/dta/icudtl.dat" desc='二进制文件,不影响兼容性'/>
                 <filteritem type='filepath' name="packages/share_plus/share_plus/example/ohos/entry/libs/arm64-v8a/libc++_shared.so" desc='二进制文件,不影响兼容性'/>
-
             </filefilter>
             <filefilter name="defaultPolicyFilter" desc="Filters for compatibility，license header policies">
                 <filteritem type='filepath' name="packages/pigeon/example/app/ohos/entry/src/main/ets/plugins/Messages.ets" desc='BSDStyleLicense,不影响兼容性'/>
