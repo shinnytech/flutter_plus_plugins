@@ -15,25 +15,35 @@ class Sensors extends SensorsPlatform {
 
   /// A broadcast stream of events from the device accelerometer.
   @override
-  Stream<AccelerometerEvent> get accelerometerEvents {
-    return _platform.accelerometerEvents;
+  Stream<AccelerometerEvent> accelerometerEventStream({
+    Duration samplingPeriod = SensorInterval.normalInterval,
+  }) {
+    return _platform.accelerometerEventStream(samplingPeriod: samplingPeriod);
   }
 
   /// A broadcast stream of events from the device gyroscope.
   @override
-  Stream<GyroscopeEvent> get gyroscopeEvents {
-    return _platform.gyroscopeEvents;
+  Stream<GyroscopeEvent> gyroscopeEventStream({
+    Duration samplingPeriod = SensorInterval.normalInterval,
+  }) {
+    return _platform.gyroscopeEventStream(samplingPeriod: samplingPeriod);
   }
 
   /// Events from the device accelerometer with gravity removed.
   @override
-  Stream<UserAccelerometerEvent> get userAccelerometerEvents {
-    return _platform.userAccelerometerEvents;
+  Stream<UserAccelerometerEvent> userAccelerometerEventStream({
+    Duration samplingPeriod = SensorInterval.normalInterval,
+  }) {
+    return _platform.userAccelerometerEventStream(
+        samplingPeriod: samplingPeriod);
   }
 
   /// A broadcast stream of events from the device magnetometer.
   @override
-  Stream<MagnetometerEvent> get magnetometerEvents {
-    return _platform.magnetometerEvents;
+  Stream<MagnetometerEvent> magnetometerEventStream({
+    Duration samplingPeriod = SensorInterval.normalInterval,
+  }) {
+    return _platform.magnetometerEventStream(samplingPeriod: samplingPeriod);
   }
+
 }

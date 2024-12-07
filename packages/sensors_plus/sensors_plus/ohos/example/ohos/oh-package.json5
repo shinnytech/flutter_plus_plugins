@@ -14,7 +14,7 @@
   },
   "overrides": {
     "@ohos/flutter_ohos": "file:./har/flutter.har",
-    "sensors_plus_ohos": "file:F:./har/sensors_plus_ohos.har",
+    "sensors_plus_ohos": "file:./har/sensors_plus_ohos.har",
     "@ohos/flutter_module": "file:./entry"
   }
 }
