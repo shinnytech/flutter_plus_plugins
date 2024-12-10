@@ -10,20 +10,20 @@ final _sensors = Sensors();
 
 /// A broadcast stream of events from the device accelerometer.
 Stream<AccelerometerEvent> get accelerometerEvents {
-  return _sensors.accelerometerEvents;
+  return _sensors.accelerometerEventStream();
 }
 
 /// A broadcast stream of events from the device gyroscope.
 Stream<GyroscopeEvent> get gyroscopeEvents {
-  return _sensors.gyroscopeEvents;
+  return _sensors.gyroscopeEventStream();
 }
 
 /// Events from the device accelerometer with gravity removed.
 Stream<UserAccelerometerEvent> get userAccelerometerEvents {
-  return _sensors.userAccelerometerEvents;
+  return _sensors.userAccelerometerEventStream();
 }
 
 /// A broadcast stream of events from the device magnetometer.
 Stream<MagnetometerEvent> get magnetometerEvents {
-  return _sensors.magnetometerEvents;
+  return _sensors.magnetometerEventStream();
 }
