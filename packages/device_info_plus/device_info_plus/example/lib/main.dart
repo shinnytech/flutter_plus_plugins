@@ -8,7 +8,6 @@ import 'dart:async';
 import 'dart:developer' as developer;
 
 import 'package:device_info_plus/device_info_plus.dart';
-import 'package:device_info_plus/device_info_plus_ohos.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -30,8 +29,6 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   static final DeviceInfoPlugin deviceInfoPlugin = DeviceInfoPlugin();
-  static final DeviceInfoOhosPlugin deviceInfoOhosPlugin =
-      DeviceInfoOhosPlugin();
   Map<String, dynamic> _deviceData = <String, dynamic>{};
 
   @override
@@ -66,7 +63,7 @@ class _MyAppState extends State<MyApp> {
             deviceData = _readMacOsDeviceInfo(await deviceInfoPlugin.macOsInfo);
             break;
           case TargetPlatform.ohos:
-            deviceData = (await deviceInfoOhosPlugin.ohosDeviceInfo).data;
+            deviceData = (await deviceInfoPlugin.ohosDeviceInfo).data;
             break;
           default:
             deviceData = <String, dynamic>{
