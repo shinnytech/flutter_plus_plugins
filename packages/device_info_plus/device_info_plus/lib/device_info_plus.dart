@@ -5,7 +5,9 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:device_info_plus/src/model/ohos_device_info.dart';
 import 'package:device_info_plus_platform_interface/device_info_plus_platform_interface.dart';
+import 'package:device_info_plus_platform_interface/method_channel/method_channel_device_info.dart';
 import 'package:flutter/foundation.dart';
 
 import 'src/model/android_device_info.dart';
@@ -39,6 +41,28 @@ class DeviceInfoPlugin {
   // This is to manually endorse the Linux plugin until automatic registration
   // of dart plugins is implemented.
   // See https://github.com/flutter/flutter/issues/52267 for more details.
+  static MethodChannelDeviceInfo get _ohosPlatform {
+    return DeviceInfoPlatform.instance as MethodChannelDeviceInfo;
+  }
+
+  /// This information does not change from call to call. Cache it.
+  OhosDeviceInfo? _cachedOhosDeviceInfo;
+
+  /// Information derived from `@ohos.deviceInfo`.
+  ///
+  /// https://developer.harmonyos.com/cn/docs/documentation/doc-references-V3/js-apis-device-info-0000001428061996-V3
+  Future<OhosDeviceInfo> get ohosDeviceInfo async => _cachedOhosDeviceInfo ??=
+      OhosDeviceInfo.fromMap((await _ohosPlatform.deviceInfo()).data);
+
+  /// Requires permission: ohos.permission.sec.ACCESS_UDID (System permission, only open to system apps).
+  /// Device serial number.
+  /// Device Udid.
+  Future<OhosAccessUDIDInfo> get ohosAccessUDIDInfo async =>
+      OhosAccessUDIDInfo.fromMap(
+          // ignore: invalid_use_of_visible_for_testing_member
+          (await _ohosPlatform.channel.invokeMethod('getAccessUDIDInfo'))
+              .cast<String, dynamic>());
+
   static DeviceInfoPlatform get _platform {
     return DeviceInfoPlatform.instance;
   }
@@ -107,6 +131,8 @@ class DeviceInfoPlugin {
         return macOsInfo;
       } else if (Platform.isWindows) {
         return windowsInfo;
+      } else if (Platform.isOhos) {
+        return ohosDeviceInfo;
       }
     }
     // allow for extension of the plugin
