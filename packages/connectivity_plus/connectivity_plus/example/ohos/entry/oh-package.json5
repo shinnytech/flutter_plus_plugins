@@ -5,8 +5,5 @@
   "main": "",
   "author": "",
   "license": "",
-  "dependencies": {
-    "integration_test": "file:../har/integration_test.har",
-    "connectivity_plus": "file:../har/connectivity_plus.har"
-  }
+  "dependencies": {}
 }

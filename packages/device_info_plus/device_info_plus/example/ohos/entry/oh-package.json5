@@ -5,8 +5,5 @@
   "main": "",
   "author": "",
   "license": "",
-  "dependencies": {
-    "integration_test": "file:../har/integration_test.har",
-    "device_info_plus": "file:../har/device_info_plus.har"
-  }
+  "dependencies": {}
 }
