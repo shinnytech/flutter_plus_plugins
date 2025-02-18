@@ -9,7 +9,7 @@ dependencies:
   flutter:
     sdk: flutter
   meta: ^1.8.0
-  mime: ^1.0.4
+  mime: ">=1.0.4 <3.0.0"
   plugin_platform_interface: ^2.1.4
   path_provider: 
     git:
